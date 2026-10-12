@@ -1,0 +1,125 @@
+Auditing Digitoid at `~/digitoid` (no code changes). I've covered the architecture, tokens, workflow labels and logo. Next I'll look at the running UI and the report templates.
+
+Running an isolated copy of Digitoid (fake CLI, port 8799, scratch data — your real host on 8790 is untouched) to see the current screens.
+
+Now a running review (journey scenario) to see progress and findings presentation.
+
+Useful by accident: that's the failed state, and it shows the raw `spawn … ENOENT` error to the user. I'll restart with an absolute CLI path.
+
+Audit done; I have what I need. Stopping the test host, then checking my approach with the advisor before writing the proposal.
+
+# Digitoid redesign proposal (no code changed yet)
+
+I audited `~/digitoid`: the host, bridge, `labels.ts`, all of `web/`, and the plugin's output templates. I also ran an isolated copy with the fake CLI on port 8799 and a scratch data folder; your real host on 8790 wasn't touched. The wireframe above sketches the proposed review workspace. Its data is made up for illustration.
+
+## 0. Decisions this brief would reverse
+
+The brief overturns four things you settled recently. I need a yes or no on each before I build anything.
+
+| Your decision | What the brief asks | My recommendation |
+|---|---|---|
+| Chat-first, claude.ai layout (today) | Workspace built around the review | **Change it.** The conversation becomes one tab, not the whole page. |
+| Sidebar with no search or extra lines (today) | Search plus clear statuses | **Change it.** Add search and one status line per row, nothing more. |
+| Logo 04 "The Oid" (chosen today) | New geometric logo | **Keep 04** unless you want to reopen it. Concept below, sketched only if you say yes. |
+| Mascot, splash, flying report page | No decorative UI | **Remove them from the workspace.** Keep the mascot only on the empty state, or drop it. |
+
+## 1. Audit: what I saw
+
+- **Titles:** a review is titled with its first message ("journey for Request Chequebook PRD"). Reviews that die before starting show up as "New review" right under the **New review** button, so the same words appear twice.
+- **Failed state:** it shows the raw error (`spawn … ENOENT`) with no next step.
+- **Progress:** it's shown as raw agent activity. There's a step chip, "Step 2 of 6" dividers in the thread, "6 actions" groups, and counts of files read and searches. The useful structure already exists (`WORKFLOW` in `server/labels.ts`, `web/progress.js`), but it's buried in the thread.
+- **Findings:** they aren't structured anywhere. They only exist in markdown prose and report files.
+- **The execution plan can't appear today.** `REPORT_RE` (`server/host.ts:630`) and the scope prompt's write list only allow `*_UNDERSTANDING_REPORT.md` and `DS_TEAM_MESSAGE_*`. So `IMPLEMENTATION_PROMPT_*`, `PENDING_QUESTIONS_*`, `REQUIREMENTS_ANALYSIS_*` and `TECHNICAL_PLAN_*` are hidden or refused.
+- **Type:** there are two type scales. Chat text is one step smaller through a scoped override in `tokens.css`. There are no spacing tokens.
+- **Colour:** the brand red `#c8102e` is almost the same as the error red `#fc3e30`. Brand, primary buttons and errors therefore look alike.
+- **Breakpoints:** there are three, at 1280 (left over from the removed History panel), 1100 and 900, each with its own drawer.
+- **Internal details on screen:** the process id in the start-up timeline, the context percentage, the model id, and the version banner.
+
+## 2. Information architecture
+
+```
+Sidebar:  Digitoid · New review · Search · Reviews (title + one status line) · Account
+Review:   Header (feature title, Jira, inputs, status pill, primary action)
+          Stage rail: Intake → Evaluate → Team gate → Engineering → Android plan → Execution plan
+          Tabs: Overview · Findings · Questions · Execution plan · Conversation · Files
+```
+
+- **Overview:** shows the current stage in plain words and what needs you. Once done, it shows the readiness summary.
+- **Findings:** four groups (Design, Requirements, Code reuse, plus clarifications, which live in Questions). Each finding is marked Verified, Recommended or Assumed, with its evidence (`file:line`, Figma node, question id) shown when you expand the row.
+- **Questions:** the open questions per team, answered inline. These reuse today's ask, form and confirm cards.
+- **Execution plan:** the rendered `IMPLEMENTATION_PROMPT_*.md` with **Copy for Claude Code**, Download and a short "what this plan assumes" list.
+- **Conversation:** today's thread and message box, unchanged in behaviour. Raw activity rows fold away here.
+- **Files:** today's Report files panel, moved into a tab.
+
+**Review titles** come from the `<FEATURE>` name of the first report the review claims. If there's none yet, they fall back to the intake feature name, then to the first message.
+
+## 3. Key screens and states
+
+**New review (intake).** A compact form:
+- BRD/PRD (paste or attach)
+- Figma journey link
+- Checkout
+- Optional side decisions
+
+It only builds the first message. Step 1's hard stop and the `/api/session/start` flow stay as they are, and you can still type freely.
+
+**Review states.** Each state appears once, in the header pill and the sidebar row:
+
+| State | What it shows |
+|---|---|
+| Loading | Skeleton plus "Starting Claude Code…". No process id or timeline. |
+| Running | Stage plus a plain line ("Comparing the PRD with the Figma journey"). Activity is behind "Show details". |
+| Awaiting input | Opens the Questions tab with a count. The message box is dimmed, as today. |
+| Failed | What happened, what to do next, and Retry or Resume. The technical detail is folded. |
+| Completed | Overview shows readiness. The Execution plan tab is the primary action. |
+| Stopped, queued, usage limit, host outdated | Kept, restyled as calm inline notices. |
+
+## 4. Where findings come from (orchestration untouched)
+
+The host parses the plugin's own templates; nothing about how the agents run changes.
+
+**Source for each group:**
+- `PENDING_QUESTIONS` table → Questions
+- `REQUIREMENTS_ANALYSIS` §2 and §3 → Requirements
+- `REQUIREMENTS_ANALYSIS` §7 → Code reuse
+- `TEAM_MESSAGE_DESIGN` and `DS_TEAM_MESSAGE` → Design
+- `REQUIREMENTS_ANALYSIS` §4 contracts, marked confirmed or PROPOSED
+
+**Evidence label, using the plugin's existing vocabulary:**
+- **Verified:** cited and confirmed.
+- **Recommended:** class 4 (proposed) or a PROPOSED contract.
+- **Assumed:** class 6 (unverified) or "Assumed (waiver)".
+
+**Caveat:** the only real output on disk is `CHEQUEBOOK_UNDERSTANDING_REPORT.md`. The parser would be designed against the templates and checked on the first full real run. A bridge tool `record_finding` stays a later option if parsing proves brittle.
+
+**One change is required:** widen `REPORT_RE` and the scope-prompt write list to the step 3–6 outputs. Without it, the Execution plan tab can't exist. This is already an open item with you.
+
+## 5. Components
+
+| Reuse as-is | Improve | Remove or demote |
+|---|---|---|
+| Ask, form, confirm and permission cards; message box and options row; `confirmModal`; setup and gate screens; report list and preview; stepper data (`WORKFLOW`) | Sidebar row (title, status, search); conversation bar → review header; work panel → stage rail plus one-line status; start-up and ended cards → state notices; home screen → intake form | Splash flight, `flyReport`, mascot dock in the workspace, step dividers in the thread, the 1280 and 1100 drawers (replaced by one panel breakpoint), toolbar context meter (moved into "details") |
+
+## 6. Design system
+
+- **Type:** one scale (12, 13, 14, 16, 20) in `tokens.css`, with no scoped override.
+- **Spacing:** tokens 4, 8, 12, 16, 24, 32.
+- **Colour:** brand red only for the logo and the one primary action. Separate status colours for running (blue), awaiting input (amber), failed (red, distinct from brand), done (green). Three evidence tints that reuse the same roles.
+- **Layout:** container queries (already in `progress.css`) instead of window breakpoints. Target widths are 1280 to 1920, with a usable 1024 layout.
+
+## 7. Logo (only if you reopen it)
+
+The concept is **alignment**: two offset bars that close into one square. That's "requirement meets implementation", built on a 4-unit grid, one colour, and readable at 16px. It's distinct from 04's rounded character mark.
+
+## Notes
+
+- `~/digitoid` has no commits yet. Implementation should start with an initial commit so the redesign can be reviewed as a diff.
+- The screenshots I used came from the fake CLI, which is fine for layout but not for real report content.
+
+## For approval
+
+1. The four reversals in §0: yes or no on each.
+2. Widen `REPORT_RE` and the write list to the step 3–6 outputs?
+3. Parse findings from the templates now, with `record_finding` as a later option?
+4. Tabs as listed, or merge Questions into Findings?
+5. Start with an initial commit of `~/digitoid`, then build in this order: tokens → sidebar → review header and tabs → findings → execution plan → states?
