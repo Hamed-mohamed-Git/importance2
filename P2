@@ -1,0 +1,1008 @@
+DIGITOID — FINAL MASTER IMPLEMENTATION PROMPT
+
+Complete UI/UX Redesign, Branding, AI Robot Animations & Engineering Workflow
+
+You are working on the existing Digitoid project at ~/digitoid.
+
+I have reviewed your previous audit and redesign proposal. The overall direction is approved with the final decisions documented below.
+
+I am attaching the Digitoid Brand & Animation Kit v3 ZIP.
+
+Your task is to implement the complete redesign, integrate the approved branding and animations, improve the engineering review experience, and deliver a polished, reliable internal AI engineering platform.
+
+This is the final consolidated implementation brief. Do not request another general design approval. Proceed autonomously, stopping only for genuine blockers, security-sensitive decisions, or missing mandatory assets.
+
+⸻
+
+1. PRODUCT PURPOSE
+
+Digitoid is an internal AI engineering assistant for Boubyan developers.
+
+It helps developers turn business requirements and Figma designs into clear, validated implementation plans.
+
+Its responsibilities are:
+
+1. Analyze BRD/PRD requirements and acceptance criteria.
+2. Validate Figma journeys against the requirements.
+3. Compare requirements and designs with existing repository code and similar implemented features.
+4. Identify missing requirements, design gaps, inconsistencies, and reuse opportunities.
+5. Request clarification from the appropriate teams when necessary.
+6. Preserve engineering and team approval gates.
+7. Generate a reliable execution plan that developers can copy into Claude Code.
+
+The product should feel like an intelligent engineering partner, not a generic AI chatbot.
+
+Core design principles:
+
+* Calm
+* Professional
+* Minimal
+* Intelligent
+* Trustworthy
+* Developer-focused
+* Efficient
+
+The interface should communicate the value of the analysis rather than exposing unnecessary complexity from the AI agents.
+
+⸻
+
+2. FINAL APPROVED DESIGN DECISIONS
+
+These decisions override conflicting recommendations from the previous audit.
+
+2.1 Review-first interface
+
+Approved.
+
+Move from a chat-first experience to a structured review workspace.
+
+Keep the conversation available as supporting functionality.
+
+2.2 Sidebar
+
+Approved.
+
+Add compact search, meaningful review titles, and clear statuses.
+
+Avoid excessive metadata or repetitive entries.
+
+2.3 Logo
+
+The minimal Digitoid AI robot, Concept 2, is the approved visual direction.
+
+Do not introduce another logo concept, alignment bars, generic AI symbols, or unrelated mascot.
+
+2.4 Decorative elements
+
+Remove unnecessary mascot docks, flying report animations, splash effects, and decorative illustrations from the working interface.
+
+Use the robot only where it communicates identity or meaningful system state.
+
+2.5 Report permissions
+
+Approve extending the existing report allowlist to support all required workflow outputs.
+
+Preserve security boundaries.
+
+2.6 Structured findings
+
+Approve extracting structured findings from existing report templates.
+
+Avoid unnecessary new backend infrastructure.
+
+2.7 Navigation
+
+Use four main tabs:
+
+1. Overview
+2. Findings
+3. Execution Plan
+4. Activity
+
+Clarification questions belong inside Findings.
+
+Conversation, report files, and technical details belong inside Activity.
+
+2.8 Version control
+
+Create a safe initial Git baseline before making implementation changes.
+
+⸻
+
+3. BRAND KIT — SOURCE OF TRUTH
+
+Inspect the entire attached ZIP before making branding changes.
+
+Read its README, integration instructions, design tokens, animation assets, and example components.
+
+The ZIP is the source of supplied assets, but not proof that every asset is production-ready.
+
+The previous branding kits contained inconsistencies with the approved robot design.
+
+Therefore, visual fidelity is mandatory.
+
+3.1 Approved robot
+
+Preserve the approved robot’s defining features:
+
+* Rounded white head
+* Dark navy face
+* Two simple white eyes
+* Distinctive red curved accent above the head
+* Minimal side detail
+* Friendly but professional expression
+* Consistent proportions and silhouette
+
+Do not change the robot’s appearance between different product screens.
+
+Do not invent a new character.
+
+3.2 Important asset limitation
+
+The approved original artwork was generated as a raster image.
+
+Some SVG assets may contain embedded raster images rather than genuine editable vector paths.
+
+Some assets may retain a white background.
+
+The animation files are experimental derivatives and have not been confirmed pixel-perfect against the approved robot.
+
+Do not assume the ZIP is automatically production-ready.
+
+Before integrating:
+
+1. Inspect the actual assets.
+2. Compare them against the approved robot reference included in the kit.
+3. Identify any visual inconsistencies.
+4. Check transparency and edge quality.
+5. Verify favicon readability.
+6. Check animated frames for distortion or unwanted artifacts.
+
+Use the approved robot artwork as the visual reference.
+
+If an animation changes the character or looks unprofessional, do not integrate that animation.
+
+Use the approved static logo instead and report the limitation.
+
+Do not silently replace the approved robot with a different drawing.
+
+If exact vector reconstruction is necessary, identify it as a separate asset task rather than presenting an approximate reconstruction as approved.
+
+⸻
+
+4. DIGITOID LOGO IMPLEMENTATION
+
+Apply the approved identity consistently across the application.
+
+Required placements:
+
+* Main sidebar header
+* Collapsed sidebar
+* Browser favicon
+* Application icon
+* New Review welcome state
+* Appropriate loading and empty states
+
+Use a suitable asset variant for each context.
+
+Logo rules
+
+* Preserve aspect ratio.
+* Do not stretch or distort.
+* Do not recolor the robot arbitrarily.
+* Do not add unnecessary effects.
+* Do not place the logo inside excessive decorative containers.
+* Keep sufficient clear space.
+* Ensure legibility on light and dark backgrounds.
+* Avoid displaying multiple competing Digitoid logos in the same view.
+
+Wordmark
+
+Use the Digitoid wordmark from the brand kit when its appearance is suitable.
+
+Ensure consistent typography, baseline alignment, spacing, and proportions.
+
+Do not recreate a visibly different wordmark without identifying the discrepancy.
+
+Tagline
+
+Use when appropriate:
+
+From requirements to implementation.
+
+Do not repeat the tagline throughout the working interface.
+
+⸻
+
+5. BOUbyan COMPLEMENTARY BRANDING
+
+Digitoid is an internal Boubyan engineering product.
+
+Digitoid remains the primary product identity.
+
+Boubyan should appear as a subtle complementary endorsement.
+
+Requirements
+
+* Use the official Boubyan logo only.
+* Prefer approved corporate assets already available in the project.
+* Do not reproduce the Boubyan logo from an AI-generated image.
+* Do not approximate its Arabic lettering.
+* Do not redraw its symbol.
+* Do not use an unverified logo extracted from a screenshot.
+* Respect official brand proportions and clear space.
+
+Suggested placement:
+
+A compact Powered by Boubyan or equivalent approved co-branding lockup in a suitable location such as the sidebar footer.
+
+Do not make Boubyan branding compete with Digitoid’s identity.
+
+If the official Boubyan asset is unavailable, leave the current approved branding unchanged and report the missing asset.
+
+Do not block unrelated UI work because of a missing complementary logo.
+
+⸻
+
+6. DESIGN SYSTEM
+
+Build a consistent design system using the supplied brand tokens and the existing frontend architecture.
+
+6.1 Main colors
+
+The proposed Digitoid palette is:
+
+* Primary Navy: #0B1F3B
+* Brand Red: #E11B2E
+* Neutral Gray: #6B7280
+* Light Surface: #F5F7FA
+* White: #FFFFFF
+
+These are proposed Digitoid values, not verified official Boubyan brand specifications.
+
+Inspect the attached tokens before implementation.
+
+Color usage
+
+Navy should provide a professional foundation.
+
+Red should remain a restrained brand accent.
+
+Neutral colors should dominate the workspace.
+
+Do not make every primary action bright red.
+
+Do not use brand red as the default error color.
+
+Create separate semantic tokens for:
+
+* Brand
+* Primary action
+* Secondary action
+* Text
+* Muted text
+* Borders
+* Surfaces
+* Hover
+* Selected
+* Focus
+* Disabled
+* Success
+* Warning
+* Error
+* Information
+
+Use status colors only where they communicate meaning.
+
+Avoid excessive colored badges, tinted cards, gradients, and shadows.
+
+6.2 Typography
+
+Use one consistent typography system.
+
+Recommended fonts:
+
+* English UI: Inter
+* Arabic UI: Noto Sans Arabic
+* Code: system monospace or the project’s existing approved coding font
+
+If an official Boubyan font already exists in the project and is approved for this use, evaluate it first.
+
+Do not claim that Inter or Noto Sans Arabic is Boubyan’s proprietary corporate font.
+
+Do not redistribute proprietary font files.
+
+Use consistent text sizes, line heights, and weights.
+
+Remove conflicting scoped typography overrides.
+
+6.3 Spacing
+
+Use a consistent spacing scale:
+
+4, 8, 12, 16, 24, 32.
+
+Maintain comfortable spacing without wasting screen space.
+
+Avoid oversized cards and unnecessarily tall headers.
+
+The workspace should be comfortable for developers using laptops throughout the day.
+
+6.4 Responsive behavior
+
+Target usable desktop layouts from approximately 1024px to 1920px.
+
+Avoid multiple competing responsive drawers.
+
+Use container-aware layout behavior where appropriate.
+
+Ensure long reports, code blocks, tables, and forms remain usable on narrower screens.
+
+Preserve any existing dark-mode support.
+
+Do not introduce an incomplete dark mode solely for this redesign.
+
+⸻
+
+7. ROBOT ANIMATION SYSTEM
+
+Create a subtle, reusable Digitoid robot state system.
+
+The goal is to make Digitoid feel alive and intelligent without making it distracting or childish.
+
+Use the attached animation kit as a starting point, subject to visual verification.
+
+Required states
+
+Idle
+
+* Robot maintains its normal expression.
+* Occasional natural blink if the asset supports it.
+* No continuous floating or movement.
+
+Thinking
+
+* Gentle eye animation.
+* Calm, focused behavior.
+* Suitable for active reasoning or analysis.
+
+Working
+
+* Subtle eye movement.
+* Paired with a real description of the current workflow activity.
+* Do not imply progress that has not occurred.
+
+Needs Input
+
+* Calm expression.
+* Small, restrained attention indicator if appropriate.
+* Clear explanation of what the developer must answer.
+
+Completed
+
+* Brief positive expression or subtle completion feedback.
+* Return to normal afterward.
+* Only trigger when the actual process reaches a valid completed state.
+
+Failed
+
+* Neutral, non-distracting robot.
+* Clear human-readable error and next action.
+* No exaggerated sad expression or shaking.
+
+Animation rules
+
+* Preserve the exact approved silhouette.
+* Do not distort the white head or red curved accent.
+* Prefer animation of internal facial details only.
+* Do not add arms, antennas, or unrelated elements.
+* Avoid large movements.
+* Avoid glowing effects and aggressive pulses.
+* Avoid animation in the sidebar.
+* Respect prefers-reduced-motion.
+* Avoid unnecessary CPU usage.
+* Pause or reduce animations when not visible.
+* Keep static fallbacks.
+
+Timing guidance
+
+* Idle blink: occasional, approximately every 6–10 seconds.
+* Thinking: gentle repeating animation around 1.5 seconds.
+* Stage transitions: approximately 200–300 ms.
+* Completion: one short animation, under one second.
+
+These are design guidelines, not a requirement to create artificial timers for workflow state transitions.
+
+Technical implementation
+
+Inspect the application’s frontend framework before choosing the implementation.
+
+The kit may include React, JavaScript, CSS, GIF, and spritesheet examples.
+
+Use only what fits the existing architecture.
+
+Do not introduce React into a non-React project just to use the example component.
+
+Do not install a heavy animation library unnecessarily.
+
+Prefer lightweight CSS/SVG-based animation where the available artwork supports it.
+
+If the logo is raster-based and cannot be animated precisely, use the approved static asset until a suitable layered master exists.
+
+Animation placement
+
+Use animations sparingly:
+
+* New Review welcome experience
+* Initial analysis loading
+* Current review progress
+* Waiting for clarification
+* Completion feedback
+* Appropriate failure states
+
+Do not place an animated robot in every card or section.
+
+The robot is a communication element, not decoration.
+
+⸻
+
+8. SIDEBAR REDESIGN
+
+Create a compact, professional sidebar.
+
+Include:
+
+* Digitoid logo
+* New Review
+* Search
+* Review history
+* Account/settings
+
+Review rows should show:
+
+* Meaningful title
+* One concise status
+
+Avoid duplicate titles such as multiple entries called “New review.”
+
+Review title fallback order:
+
+1. Feature name from generated report
+2. Feature name from intake
+3. First meaningful user message
+4. Neutral untitled-review label
+
+Keep navigation predictable.
+
+Avoid unnecessary icons and metadata.
+
+The sidebar should remain visually calm even with many reviews.
+
+⸻
+
+9. REVIEW WORKSPACE
+
+Replace the chat-dominated layout with a structured workspace.
+
+The review header should display:
+
+* Feature title
+* Project or repository context
+* Jira reference when available
+* Review status
+* Primary contextual action
+
+Avoid excessive technical metadata.
+
+Workflow progress
+
+Preserve the existing six-stage process:
+
+1. Intake
+2. Evaluate
+3. Team Gate
+4. Engineering
+5. Android Plan
+6. Execution Plan
+
+These names should be verified against the existing workflow metadata.
+
+Do not modify the actual orchestration or approval sequence.
+
+Present progress in human-readable language.
+
+Examples:
+
+* Gathering requirements
+* Validating the Figma journey
+* Reviewing similar code
+* Waiting for design clarification
+* Preparing the technical plan
+* Generating the execution prompt
+
+Do not show raw action counts, process IDs, or context percentages as primary content.
+
+Keep technical activity accessible under Activity.
+
+⸻
+
+10. FOUR MAIN TABS
+
+Tab 1 — Overview
+
+The Overview should answer:
+
+Where is this review, what has been completed, and what should I do next?
+
+Include:
+
+* Current stage
+* Clear progress
+* Required inputs
+* Current blockers
+* Next action
+* Readiness summary when available
+
+Avoid unnecessary dashboard widgets.
+
+Use the robot animation only when it adds meaningful state feedback.
+
+Tab 2 — Findings
+
+Combine findings and clarification questions.
+
+Categories:
+
+* Design
+* Requirements
+* Code Reuse
+* Clarifications
+
+Each finding should contain:
+
+* Concise title
+* Description
+* Impact
+* Evidence
+* Required or recommended action
+* Verification classification
+
+Classifications:
+
+Verified: Supported and confirmed.
+
+Recommended: Proposed improvement or change.
+
+Assumed: Not verified or explicitly waived.
+
+Do not confuse evidence confidence with issue severity.
+
+Where available, include:
+
+* BRD/PRD section references
+* Figma nodes
+* Code file and line references
+* Existing components
+* Question IDs
+
+Use expandable details rather than showing every technical reference immediately.
+
+Clarification questions must remain answerable using existing form, ask, and confirmation components.
+
+Do not create a separate Questions tab.
+
+Tab 3 — Execution Plan
+
+This is the primary final deliverable.
+
+Display the generated implementation prompt clearly.
+
+Include:
+
+* Formatted implementation plan
+* Copy for Claude Code
+* Download
+* Source references
+* Assumptions
+* Unresolved dependencies
+* Testing expectations
+
+The plan should contain the actual generated engineering content, not an AI-generated summary that loses important implementation details.
+
+Do not fabricate missing sections.
+
+Do not mark a plan ready if required clarification or approval gates remain unresolved.
+
+Make copying the entire prompt straightforward.
+
+Tab 4 — Activity
+
+Preserve:
+
+* Existing conversation
+* Message composer
+* Interactive cards
+* Forms
+* Confirmations
+* Permissions
+* Report files
+* File previews
+* Technical activity
+* Diagnostic details
+
+Keep raw technical information collapsed by default.
+
+Do not remove information needed for debugging.
+
+⸻
+
+11. NEW REVIEW INTAKE
+
+Redesign the New Review screen into a compact guided intake.
+
+Required inputs:
+
+* BRD/PRD file or pasted content
+* Figma journey link
+* Existing optional context supported by the application
+
+Keep the form easy to understand.
+
+Do not introduce unnecessary questions.
+
+Preserve existing Step 1 requirements, validation rules, and session-start behavior.
+
+Do not weaken the agent’s hard-stop conditions.
+
+Allow developers to understand what is required before starting.
+
+⸻
+
+12. REVIEW STATES AND ERROR HANDLING
+
+Handle all existing states professionally.
+
+Loading
+
+Show a simple loading state and understandable message.
+
+Running
+
+Show current stage and meaningful activity.
+
+Awaiting Input
+
+Clearly indicate the required response and direct the developer to Findings.
+
+Failed
+
+Show:
+
+* Human-readable problem
+* Suggested next action
+* Retry/Resume only when actually supported
+* Expandable technical details
+
+Do not expose raw errors such as spawn ENOENT as the primary message.
+
+Completed
+
+Show the readiness summary.
+
+Make the Execution Plan the primary action when genuinely ready.
+
+Additional states
+
+Preserve:
+
+* Stopped
+* Queued
+* Usage limit
+* Host outdated
+
+Do not invent unsupported recovery behavior.
+
+⸻
+
+13. REPORT OUTPUTS AND SECURITY
+
+Your audit identified restrictions in REPORT_RE and the scope-prompt write list.
+
+Fix the restrictions necessary to expose valid step 3–6 outputs.
+
+Support the existing plugin’s required reports, including:
+
+* Understanding reports
+* Requirements analysis
+* Pending questions
+* Technical plans
+* Implementation prompts
+* Design/team messages
+
+Use an explicit allowlist.
+
+Preserve path validation and file access boundaries.
+
+Do not permit unrestricted filesystem access.
+
+Do not weaken existing security checks.
+
+Structured extraction
+
+Extract findings from existing report templates.
+
+Requirements:
+
+* Preserve traceability.
+* Preserve evidence.
+* Handle missing sections.
+* Handle malformed files.
+* Avoid inventing findings.
+* Avoid incorrectly upgrading assumptions to verified status.
+* Preserve readiness and approval requirements.
+
+Validate parsing against existing reports and representative fixtures.
+
+Do not introduce a new bridge tool unless template parsing proves insufficient and the need is demonstrated.
+
+⸻
+
+14. COMPONENT REUSE
+
+Reuse existing components wherever practical:
+
+* Ask cards
+* Form cards
+* Confirmation cards
+* Permission interactions
+* Message composer
+* Modals
+* Report previews
+* Workflow metadata
+* Setup screens
+* Approval gate screens
+
+Improve styling without changing behavior.
+
+Remove or demote:
+
+* Flying report effects
+* Unnecessary mascot docks
+* Redundant progress dividers
+* Excessive technical activity
+* Obsolete responsive drawers
+* Duplicate status indicators
+
+Preserve all functional capabilities.
+
+⸻
+
+15. ACCESSIBILITY AND PERFORMANCE
+
+Ensure:
+
+* Keyboard accessibility
+* Visible focus states
+* Accessible form labels
+* Readable contrast
+* Appropriate semantic HTML
+* Clear disabled states
+* Screen-reader-friendly status messages
+* Reduced-motion support
+* Efficient animation rendering
+* No unnecessary layout shifts
+* Responsive long-form content
+* Correct scrolling behavior
+
+Preserve existing Arabic/RTL support if present.
+
+Do not introduce broken or partial localization.
+
+⸻
+
+16. ENGINEERING CONSTRAINTS
+
+Do not change the underlying product behavior unnecessarily.
+
+Preserve:
+
+* Existing host architecture
+* Bridge integrations
+* Agent orchestration
+* Six-stage workflow
+* Team approval gates
+* Session behavior
+* Review history
+* Existing data
+* Existing permission controls
+
+Do not introduce unnecessary dependencies or backend infrastructure.
+
+Do not expose sensitive implementation details by default.
+
+Do not make unrelated product changes.
+
+⸻
+
+17. IMPLEMENTATION ORDER
+
+Proceed in small, reviewable stages.
+
+Phase 0 — Baseline
+
+* Inspect the attached ZIP.
+* Inspect repository state.
+* Establish a safe initial Git commit.
+* Exclude secrets and generated data.
+* Run baseline tests.
+* Document existing failures.
+
+Phase 1 — Branding
+
+* Verify robot assets against approved reference.
+* Integrate approved static logo.
+* Integrate favicon and app icons.
+* Add appropriate wordmark variants.
+* Add complementary Boubyan branding using approved assets.
+* Apply typography and semantic color tokens.
+* Resolve inconsistent legacy styling.
+
+Phase 2 — Robot Animation
+
+* Inspect animation assets.
+* Verify visual fidelity.
+* Build reusable robot state presentation.
+* Integrate appropriate loading and workflow states.
+* Add reduced-motion and static fallbacks.
+* Avoid integrating distorted or inconsistent animations.
+
+Phase 3 — Navigation
+
+* Redesign sidebar.
+* Improve review titles.
+* Add search and statuses.
+* Build review header.
+* Introduce four-tab navigation.
+
+Phase 4 — Workspace
+
+* Redesign intake.
+* Simplify progress presentation.
+* Improve review states.
+* Preserve existing interaction cards.
+
+Phase 5 — Findings
+
+* Build findings presentation.
+* Integrate clarifications.
+* Preserve source references.
+* Validate structured extraction.
+
+Phase 6 — Execution Plan
+
+* Update secure report allowlist.
+* Render implementation prompts.
+* Add copy and download.
+* Preserve readiness and approval gates.
+
+Phase 7 — Final Polish
+
+* Responsive refinement
+* Accessibility checks
+* Visual consistency
+* Animation performance
+* Empty states
+* Error handling
+* Removal of obsolete UI
+
+Phase 8 — Regression Testing
+
+Test all important workflows.
+
+⸻
+
+18. REQUIRED TEST SCENARIOS
+
+Validate:
+
+1. Creating a new review.
+2. Uploading a BRD/PRD.
+3. Pasting requirements.
+4. Providing a Figma journey.
+5. Starting analysis.
+6. Progressing through the six stages.
+7. Pausing for clarification.
+8. Answering questions.
+9. Preserving team approvals.
+10. Displaying design findings.
+11. Displaying requirement findings.
+12. Displaying code reuse opportunities.
+13. Rendering evidence references.
+14. Generating the execution plan.
+15. Copying the execution plan.
+16. Downloading reports.
+17. Failed sessions.
+18. Retry/resume behavior.
+19. Interrupted sessions.
+20. Review history persistence.
+21. Sidebar search.
+22. Browser refresh.
+23. Narrow desktop layouts.
+24. Static logo appearance.
+25. Animation state transitions.
+26. Reduced-motion behavior.
+27. Favicon appearance at small sizes.
+28. Light/dark logo readability.
+29. Missing or malformed report sections.
+30. Report file security boundaries.
+
+Use representative fixtures and isolated test data.
+
+Do not modify or corrupt existing production review data.
+
+⸻
+
+19. VISUAL QUALITY GATE
+
+Before considering the redesign complete, perform a visual comparison against the approved branding.
+
+Check:
+
+* Robot head shape
+* Eye proportions
+* Red curved accent
+* Navy face
+* White head
+* Side detail
+* Wordmark proportions
+* Logo spacing
+* Favicon readability
+* Animation consistency
+* Color usage
+* Typography consistency
+* Overall UI hierarchy
+
+The robot must look like the same character across all states.
+
+Do not claim a pixel-perfect match without verifying it.
+
+If a branding asset fails visual verification, use the approved static reference where possible and report the unresolved issue.
+
+⸻
+
+20. FINAL DELIVERABLES
+
+At the end, provide:
+
+1. Summary of completed changes.
+2. Main files and components modified.
+3. Branding assets integrated.
+4. Robot animation states implemented.
+5. Any assets rejected due to quality problems.
+6. Design system changes.
+7. Screenshots of the key screens.
+8. Test results.
+9. Known limitations.
+10. Remaining actions requiring my decision.
+
+Do not claim that a workflow, animation, or design has been verified unless it was actually tested.
+
+⸻
+
+FINAL EXPECTATION
+
+Digitoid must feel like a polished internal AI engineering product for Boubyan developers.
+
+The user experience should be:
+
+Provide requirements → Analyze → Validate → Clarify → Plan → Implement.
+
+The interface should stay calm and professional.
+
+The robot should give Digitoid a recognizable identity and subtle AI personality.
+
+The underlying engineering workflow should remain reliable and traceable.
+
+The final execution plan should be trustworthy and immediately useful to developers.
+
+Proceed with the complete implementation now, in small, testable stages. Preserve the approved branding, maintain security and workflow integrity, and avoid unnecessary complexity.
