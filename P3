@@ -1,923 +1,118 @@
-DIGITOID — COMPLETE TESTING FEEDBACK & UX REFINEMENT
-
-Final Consolidated Implementation Prompt for Claude
-
-You are working on the existing Digitoid project at ~/digitoid.
-
-I have completed my initial hands-on testing and identified several functional, usability, and workflow improvements.
-
-This document combines all feedback from the first testing review through the latest Findings screen review.
-
-Treat this as the single source of truth for the current refinement pass. It supersedes the earlier individual testing-feedback prompts.
-
-Do not redesign Digitoid from scratch.
-
-Preserve the approved:
-
-* Digitoid AI robot identity and branding.
-* Boubyan complementary branding.
-* Design system and typography.
-* Four-tab review workspace.
-* Six-stage engineering workflow.
-* AI agent orchestration and team approval gates.
-* Existing integrations and security boundaries.
-
-The objective is to make Digitoid simpler, more organized, more intelligent, and easier for developers to use.
-
-The main principle is:
-
-Show developers what matters, guide them to the right place, and ask only for what is needed.
-
-⸻
-
-1. PROFESSIONAL SIDEBAR REDESIGN
-
-The current sidebar needs to feel more professional and organized.
-
-It should function as a focused engineering task workspace rather than a generic chat history.
-
-1.1 Sidebar Structure
-
-Organize the sidebar into:
-
-1. Digitoid logo and wordmark.
-2. Subtle Boubyan Digital Factory identity.
-3. New Review action.
-4. Review search.
-5. Active Reviews.
-6. Archived Reviews.
-7. Account and Settings.
-
-Follow the approved Digitoid design system.
-
-Use restrained colors, consistent spacing, and clear typography.
-
-Avoid:
-
-* Excessive icons.
-* Decorative elements.
-* Unnecessary badges.
-* Heavy borders.
-* Repeated separators.
-* Large empty areas.
-* Excessive metadata.
-
-The sidebar should remain usable with many reviews.
-
-1.2 Active Reviews
-
-Show reviews that still require work or attention.
-
-Include:
-
-* Running.
-* Queued.
-* Awaiting input.
-* Paused.
-* Stopped.
-* Failed.
-* Incomplete.
-
-Each review should display:
-
-* A meaningful feature title.
-* One concise status description.
-
-Reviews requiring developer action should be easy to identify.
-
-Keep sorting predictable.
-
-Use subtle highlighting for the selected review.
-
-1.3 Meaningful Review Titles
-
-Avoid repeated generic titles such as “New review.”
-
-Use this fallback order:
-
-1. Feature name from the generated report.
-2. Feature name from intake.
-3. First meaningful user message.
-4. Neutral untitled-review label.
-
-Do not create duplicate review entries.
-
-Handle long titles gracefully.
-
-1.4 Automatic Archiving
-
-When a review is genuinely completed, automatically move it to Archived Reviews.
-
-Archived Reviews must be collapsed and hidden by default.
-
-A review qualifies for automatic archiving only when:
-
-* The actual workflow has successfully completed.
-* Required approval gates are resolved.
-* Required final reports are generated.
-* The execution plan is ready.
-* No blocking clarification remains.
-
-Do not archive reviews merely because the Claude process stopped.
-
-Do not archive:
-
-* Failed reviews.
-* Stopped reviews.
-* Incomplete reviews.
-* Awaiting-input reviews.
-* Queued reviews.
-
-Archiving must not modify or delete review content.
-
-Preserve:
-
-* Findings.
-* Clarifications.
-* Responses.
-* Execution plans.
-* Generated reports.
-* Conversation history.
-* Review metadata.
-
-If a review completes while open, keep it visible in the workspace even though it moves into the archive.
-
-Do not abruptly navigate away.
-
-1.5 Archived Reviews
-
-* Collapsed by default.
-* Show archived review count.
-* Expandable when needed.
-* Searchable even while collapsed.
-* Fully accessible.
-* No mandatory manual Archive action.
-* No automatic reopening after navigation.
-
-1.6 Search
-
-Search by review title.
-
-Include both active and archived reviews.
-
-Show archived matches in search results without requiring users to expand the archive.
-
-Keep search fast and simple.
-
-Avoid unnecessary advanced filters.
-
-1.7 Delete Review
-
-Add a discreet contextual menu to sidebar review rows.
-
-Support Delete Review with confirmation.
-
-Requirements:
-
-* Clearly identify the review.
-* Require explicit confirmation.
-* Handle active sessions safely.
-* Prevent partial deletion.
-* Respect filesystem and security boundaries.
-* Remove associated data according to the existing lifecycle.
-* Update the sidebar after successful deletion.
-* Navigate safely if the selected review is deleted.
-* Never affect unrelated reviews.
-
-Do not implement deletion as a visual-only operation.
-
-⸻
-
-2. INTELLIGENT WORKSPACE NAVIGATION
-
-Digitoid should guide the developer automatically to the relevant workspace location.
-
-The user should not need to search manually for the next required action.
-
-2.1 Context-Aware Navigation
-
-Use actual workflow state.
-
-Expected behavior:
-
-* Normal progress → Overview.
-* Finding requiring attention → Findings.
-* Clarification required → Findings, focused on the relevant question.
-* Execution plan ready → Execution Plan when appropriate.
-* Opening an existing review → Most relevant tab based on current state.
-
-Navigation must be predictable.
-
-Do not constantly switch tabs.
-
-Do not interrupt users who are reading or editing content.
-
-Do not override deliberate user navigation for routine background updates.
-
-Only redirect automatically when a new meaningful action requires attention.
-
-Avoid repeated navigation to the same tab.
-
-2.2 Return to Overview After Response
-
-After the user successfully responds to a finding, clarification, or required question:
-
-1. Validate the response.
-2. Submit it through the existing workflow.
-3. Confirm successful acceptance.
-4. Return to Overview.
-5. Show updated progress.
-
-Do not navigate away if validation or submission fails.
-
-If another question immediately requires a response, guide the user to it without creating navigation loops.
-
-Preserve existing approval gates.
-
-2.3 Focus the Required Item
-
-When navigating to Findings:
-
-* Select the relevant team/category when known.
-* Bring the required question or finding into view.
-* Clearly identify what requires action.
-* Avoid showing unrelated items above the required action.
-* Preserve accessibility and keyboard focus behavior.
-
-Do not confuse an informational finding with a question requiring a response.
-
-⸻
-
-3. OVERVIEW ROBOT ANIMATION
-
-The Digitoid robot in Overview should reflect the current review state.
-
-Use the approved Digitoid Brand & Animation Kit.
-
-Do not redesign the robot.
-
-3.1 Required States
-
-Idle
-
-Normal expression with occasional subtle blinking.
-
-Thinking
-
-Gentle eye animation during analysis.
-
-Working
-
-Subtle animation with a meaningful description of the current activity.
-
-Needs Input
-
-Calm attention expression with a clear action request.
-
-Completed
-
-Brief positive expression when the review successfully completes.
-
-Failed
-
-Neutral robot with a clear error message and supported recovery action.
-
-3.2 Animation Requirements
-
-* Preserve the approved robot silhouette.
-* Preserve the white head, navy face, white eyes, and red curved accent.
-* Do not distort proportions.
-* Avoid exaggerated movement.
-* No floating effects.
-* No arms or antennas.
-* No unnecessary glow.
-* No animated sidebar logo.
-* Respect reduced-motion preferences.
-* Provide static fallbacks.
-* Avoid unnecessary animation libraries.
-* Connect animation to real workflow state.
-
-Do not simulate completion or progress using arbitrary timers.
-
-3.3 Asset Quality
-
-Some existing animation assets may not perfectly match the approved robot.
-
-Inspect them before integration.
-
-If an animation contains artifacts or changes the robot’s appearance, do not use it.
-
-Use the approved static asset instead.
-
-Do not silently replace the robot with another design.
-
-⸻
-
-4. REMOVE THE HEADER STATUS BADGE
-
-Remove the status badge from the review header.
-
-The header should remain clean and focused.
-
-Communicate status through:
-
-* Overview progress.
-* Current workflow stage.
-* Robot state.
-* Contextual messages.
-* Concise sidebar status.
-
-Avoid redundant status indicators.
-
-Preserve important status information where genuinely useful.
-
-⸻
-
-5. FIGMA MCP PRE-FLIGHT VALIDATION
-
-Figma MCP is required for reliable design validation.
-
-Verify it at the beginning of the review.
-
-Do not discover a missing connection after several stages.
-
-5.1 Required Checks
-
-During intake:
-
-1. Check whether Figma MCP is configured.
-2. Verify actual accessibility and required capabilities.
-3. Confirm the supplied Figma journey can be accessed when applicable.
-4. Detect missing permissions or connection failures.
-5. Block Figma-dependent validation when unavailable.
-
-A configuration entry alone does not prove connectivity.
-
-5.2 Missing Connection Behavior
-
-If Figma MCP is unavailable:
-
-* Explain the issue in simple language.
-* Ask the user to connect or configure it.
-* Show the required next action.
-* Do not continue Figma-dependent validation.
-* Do not invent design findings.
-* Preserve existing review inputs and session state.
-* Recheck after the issue is resolved.
-* Resume from the appropriate point.
-
-Keep the message short and actionable.
-
-⸻
-
-6. SIMPLIFY STEP 1 — ESSENTIAL INPUTS ONLY
-
-Step 1 should focus on the minimum information required to begin the review.
-
-It must be clean, compact, and easy to understand.
-
-6.1 Primary Inputs
-
-Show:
-
-* BRD/PRD document or pasted requirements.
-* Figma journey link.
-* Mandatory missing prerequisites.
-
-Do not overwhelm the user with optional fields.
-
-6.2 UX Requirements
-
-* Ask only for necessary information.
-* Use simple language.
-* Avoid lengthy explanations.
-* Avoid unnecessary technical terminology.
-* Avoid repeated questions.
-* Avoid large forms.
-* Keep optional information hidden until needed.
-* Show validation messages beside the relevant input.
-* Surface Figma MCP issues immediately.
-* Preserve existing hard-stop validation.
-
-If information is already available, do not ask for it again.
-
-6.3 Ideal Flow
-
-Provide BRD → Provide Figma → Validate prerequisites → Start Review.
-
-Additional information should be requested only when genuinely necessary.
-
-Do not weaken the underlying review requirements.
-
-⸻
-
-7. EXCLUDE MUSA3ED FROM PLUGIN SCOPE
-
-Musa3ed is handled as a separate task.
-
-If Musa3ed functionality appears in the BRD/PRD, exclude it from the current Digitoid feature review.
-
-Apply this rule within the AI plugin instructions, not only in the UI.
-
-7.1 Exclusion Rules
-
-* Do not analyze Musa3ed-specific features.
-* Do not validate Musa3ed-specific designs.
-* Do not generate Musa3ed-specific findings.
-* Do not create Musa3ed implementation tasks.
-* Do not ask unnecessary Musa3ed clarification questions.
-* Do not include Musa3ed work in the Claude Code execution plan.
-* Do not describe Musa3ed as a related feature or dependency merely because it appears in the PRD.
-
-Preserve all remaining in-scope requirements.
-
-If a Musa3ed reference creates a genuine ambiguity about the boundary of an in-scope requirement, ask only the minimum necessary clarification.
-
-Do not remove unrelated requirements.
-
-⸻
-
-8. FINDINGS SCREEN — COMPLETE SIMPLIFICATION
-
-The Findings screen is currently too technical and difficult to scan.
-
-It exposes internal report identifiers, classifications, source filenames, and lengthy descriptions.
-
-The redesigned screen must answer:
-
-Who needs to do what, and why?
-
-Use extremely simple, natural English.
-
-Do not make users interpret internal AI terminology.
-
-8.1 Organize by Responsible Team
-
-Replace the current primary categories with:
-
-* All
-* Product Owner
-* Design Team
-* Developer
-
-The All view should be the default.
-
-In All, group findings by responsible team.
-
-Product Owner
-
-Business-related items, including:
-
-* Missing business rules.
-* Conflicting requirements.
-* Unclear behavior.
-* Acceptance criteria.
-* Business decisions.
-
-Design Team
-
-Design-related items, including:
-
-* Figma/BRD mismatches.
-* Missing screens.
-* Missing UI states.
-* Unclear journeys.
-* Design decisions.
-
-Developer
-
-Engineering-related items, including:
-
-* Existing code reuse.
-* Technical dependencies.
-* API questions.
-* Implementation risks.
-* Technical clarifications.
-
-Use actual owner metadata whenever available.
-
-Do not automatically assign every requirement issue to Product Owner.
-
-If ownership is unknown, preserve that uncertainty.
-
-If an item involves multiple teams, preserve shared ownership without duplicating the underlying finding.
-
-No findings should disappear because of grouping.
-
-8.2 Finding Presentation
-
-Each finding should initially display only:
-
-Title
-
-A short, understandable description.
-
-Problem
-
-What is wrong or unclear?
-
-Why it matters
-
-Why should the team care?
-
-What’s needed
-
-What decision, clarification, or action is required?
-
-Keep each section concise.
-
-Avoid unnecessary paragraphs.
-
-Example
-
-Current technical wording:
-
-“MM-04 — Chequebook fees switch controls fee options and amounts.”
-
-Improved wording:
-
-Should customers see cheque fees before confirming?
-
-Problem: The requirements are unclear about when fees should appear.
-
-Why it matters: Customers may place an order without knowing the fee.
-
-What’s needed: Product Owner to confirm when fees must be displayed.
-
-This is an illustration of simpler wording, not a new confirmed business requirement.
-
-Do not invent information when simplifying findings.
-
-8.3 Hide Technical Details
-
-Move secondary information into expandable Show Details.
-
-Include:
-
-* Finding IDs.
-* Verification status.
-* Evidence.
-* PRD references.
-* Figma nodes.
-* Code paths.
-* Line numbers.
-* Source report filenames.
-* Original wording.
-* Report status.
-
-Preserve full traceability.
-
-The simple presentation must not remove evidence.
-
-8.4 Simplify Finding Statuses
-
-Avoid repeating badges such as:
-
-* Assumed.
-* Requirements.
-* Blocking.
-
-Use minimal, meaningful user-facing states where appropriate:
-
-* Needs decision.
-* Needs clarification.
-* Recommended change.
-* Resolved.
-
-Do not confuse:
-
-* Severity.
-* Verification confidence.
-* Blocking state.
-* Resolution state.
-
-These must remain distinct in the underlying data.
-
-Do not mark an item resolved merely because it was acknowledged.
-
-Keep real blockers visible.
-
-8.5 Clarifications Within Findings
-
-Keep clarification questions in the Findings tab.
-
-When a question requires attention:
-
-* Navigate to Findings.
-* Focus the specific question.
-* Show a clear action.
-* Allow the user to respond.
-* Return to Overview after successful submission.
-
-Avoid placing large, unrelated agent interaction cards above the findings list.
-
-Workflow-level approvals should remain separate from normal findings, even when presented within the same workspace.
-
-Do not misclassify approval gates as findings.
-
-8.6 Filters and Counts
-
-Provide simple team filters.
-
-Show accurate counts.
-
-Avoid large empty sections.
-
-If a selected team has no findings, display a compact empty state.
-
-Do not add unnecessary nested filters or dashboards.
-
-8.7 Generated Team Messages
-
-Apply the same simple-language principle to generated team messages.
-
-Messages should clearly communicate:
-
-1. What needs clarification or correction.
-2. Why it matters.
-3. What response is required.
-
-Preserve exact technical references in supporting details.
-
-Do not remove important evidence.
-
-Do not change the business meaning.
-
-8.8 Findings Data Integrity
-
-Inspect the existing report templates and extraction logic.
-
-Preserve:
-
-* Stable finding ID.
-* Original source content.
-* Responsible team.
-* Problem.
-* Impact.
-* Required action.
-* Evidence.
-* Verification classification.
-* Blocking state.
-* Resolution state when available.
-
-Use existing metadata wherever possible.
-
-Do not invent owners or conclusions.
-
-Handle missing and malformed report sections gracefully.
-
-Avoid unnecessary backend infrastructure.
-
-⸻
-
-9. VISUAL DESIGN PRINCIPLES
-
-Apply the approved Digitoid design system across all refinements.
-
-The interface must remain:
-
-* Calm.
-* Minimal.
-* Professional.
-* Consistent.
-* Easy to scan.
-* Responsive.
-* Accessible.
-
-Use restrained colors.
-
-Avoid excessive cards, badges, shadows, borders, and icons.
-
-Prioritize information hierarchy and readability.
-
-Do not make the Findings screen visually heavier than the rest of the application.
-
-Keep technical details accessible through progressive disclosure.
-
-⸻
-
-10. ENGINEERING CONSTRAINTS
-
-Preserve the existing architecture.
-
-Do not change unrelated functionality.
-
-Preserve:
-
-* Host and bridge.
-* Six-stage AI orchestration.
-* Team approval gates.
-* Review persistence.
-* Session management.
-* Report generation.
-* Execution plan generation.
-* Existing permission handling.
-* Security boundaries.
-* Four-tab workspace.
-* Approved branding.
-
-Reuse existing components and lifecycle information wherever possible.
-
-Avoid unnecessary dependencies and new infrastructure.
-
-Do not silently weaken validation or approval requirements.
-
-⸻
-
-11. IMPLEMENTATION ORDER
-
-Proceed in small, reviewable stages.
-
-Phase 1 — Sidebar
-
-* Redesign sidebar.
-* Improve titles.
-* Add search.
-* Organize active reviews.
-* Implement automatic archiving.
-* Implement safe deletion.
-* Verify review selection and persistence.
-
-Phase 2 — Navigation
-
-* Implement context-aware tab navigation.
-* Focus required findings and questions.
-* Return to Overview after successful responses.
-* Prevent disruptive tab switching.
-
-Phase 3 — Overview
-
-* Remove header status badge.
-* Connect robot animation to real status.
-* Improve contextual progress messages.
-* Preserve static fallbacks.
-
-Phase 4 — Plugin and Figma
-
-* Implement Musa3ed exclusion.
-* Add Figma MCP preflight.
-* Verify connection failure and recovery.
-* Preserve remaining in-scope requirements.
-
-Phase 5 — Step 1
-
-* Simplify intake.
-* Show only essential inputs.
-* Improve validation.
-* Remove unnecessary friction.
-
-Phase 6 — Findings
-
-* Organize by responsible team.
-* Simplify finding descriptions.
-* Improve statuses.
-* Hide technical details.
-* Integrate clarification questions.
-* Simplify generated team messages.
-* Validate parser and data integrity.
-
-Phase 7 — Final Polish
-
-* Responsive behavior.
-* Accessibility.
-* Typography and spacing.
-* Animation performance.
-* Error handling.
-* Regression testing.
-
-⸻
-
-12. REQUIRED TESTING
-
-Sidebar
-
-1. New reviews appear under Active Reviews.
-2. Titles are meaningful.
-3. Running reviews remain active.
-4. Awaiting-input reviews remain active.
-5. Failed and stopped reviews remain active.
-6. Completed reviews automatically move to Archived Reviews.
-7. Archived Reviews is collapsed by default.
-8. Archived reviews remain accessible.
-9. Search includes active and archived reviews.
-10. Deletion works safely.
-11. Deleting the selected review navigates safely.
-12. Archiving preserves all content.
-13. Completing an open review does not navigate away.
-
-Navigation
-
-14. Required clarification opens Findings.
-15. Correct question is focused.
-16. Successful response returns to Overview.
-17. Failed response stays on the current screen.
-18. Automatic navigation does not interrupt active work.
-19. Execution Plan becomes accessible when ready.
-
-Overview
-
-20. Robot animation reflects actual state.
-21. Approved robot identity is preserved.
-22. Reduced-motion preferences are respected.
-23. Sidebar logo remains static.
-24. Header status badge is removed.
-
-Plugin and Figma
-
-25. Musa3ed-specific work is excluded.
-26. In-scope requirements remain intact.
-27. Missing Figma MCP is detected early.
-28. Inaccessible Figma MCP is detected.
-29. Figma-dependent validation does not proceed without access.
-30. Connection recovery works.
-31. Existing review inputs are preserved.
-
-Step 1
-
-32. Only essential inputs are shown.
-33. BRD upload works.
-34. Pasted requirements work.
-35. Figma journey input works.
-36. Validation is clear.
-37. Previously supplied information is not requested again.
-38. Review starts normally when prerequisites are satisfied.
-
-Findings
-
-39. Findings are grouped correctly by team.
-40. All findings remain accessible.
-41. Counts are accurate.
-42. Unknown ownership is preserved.
-43. Shared ownership is handled correctly.
-44. Simplified text preserves original meaning.
-45. Technical evidence remains accessible.
-46. Evidence links work.
-47. Blocking issues remain identifiable.
-48. Clarification questions work.
-49. Successful responses return to Overview.
-50. Team messages use simple language.
-51. Empty team views display correctly.
-52. Malformed reports do not cause findings to disappear.
-
-Regression
-
-53. All six workflow stages remain functional.
-54. Approval gates remain enforced.
-55. Reports remain accessible.
-56. Execution plans remain copyable and downloadable.
-57. Review history survives refresh.
-58. Existing security restrictions remain intact.
-
-⸻
-
-13. FINAL DELIVERABLES
-
-After implementation, provide:
-
-1. Summary of changes.
-2. Files and components modified.
-3. Updated sidebar screenshots.
-4. Overview screenshot and robot animation preview.
-5. Updated Step 1 screenshot.
-6. Updated Findings screenshot.
-7. Example simplified finding for each team.
-8. Context-aware navigation behavior.
-9. Confirmation of automatic archiving.
-10. Confirmation of Musa3ed exclusion.
-11. Confirmation of Figma MCP preflight.
-12. Tests performed and results.
-13. Remaining limitations or unresolved issues.
-
-Clearly distinguish tested functionality from assumptions.
-
-⸻
-
-FINAL EXPECTATION
-
-Digitoid must feel like a polished internal AI engineering platform for Boubyan developers.
-
-The experience should be simple:
-
-Provide requirements → Analyze → Validate → Clarify → Plan → Implement.
-
-The sidebar should show active work and hide completed reviews in an archive.
-
-The Overview should clearly communicate progress through the approved AI robot.
-
-The application should automatically guide developers to required actions.
-
-Step 1 should request only essential inputs.
-
-Figma MCP must be validated at the beginning.
-
-Musa3ed functionality must remain outside the current review scope.
-
-Findings must be organized by responsible team and written in extremely simple English.
-
-Every finding should answer:
-
-Who needs to do what, and why?
-
-Keep the experience calm, professional, minimal, and reliable.
-
-Proceed with implementation in small, testable stages. Do not request another broad design approval. Pause only for genuine blockers, security-sensitive decisions, or missing mandatory assets.
+Profile email — findings
+21 open findings, 4 blocking
+
+PRODUCT OWNER
+1. Is the email code automatic or a choice?
+Unclear whether a verified email replaces the SMS code or is offered next to it.
+Action: One decision: (1) email is one option next to SMS and PACI (recommended), (2) email replaces SMS, (3) email only when SMS is unreachable.
+Figma: https://www.figma.com/design/pQF6ll7EUsSqQhDSjkIt92/IA---Profile?node-id=16089-16341
+
+2. What happens to customers whose shared email is reset?
+The PRD resets emails shared across customers but does not say what those customers see.
+Action: Decide whether affected customers get a notification or prompt to add a new email, and when.
+
+3. Which service-access behaviour applies?
+The PRD asks for "Disable + Hide + Show Error", which combines two options that exclude each other.
+Action: One option per service: add, update, verify and marketing emails. Recommended: Disable + Show Error.
+
+4. Are the three push notifications in scope?
+The design shows three push notifications that the PRD does not mention.
+Action: Confirm whether they are in scope. If yes, who writes the Arabic and English text and where a tap should lead.
+Figma: https://www.figma.com/design/pQF6ll7EUsSqQhDSjkIt92/IA---Profile?node-id=12752-13410
+
+5. Final wording for the alert and email
+Alert #1, Email #1 and the already-used message have no final text.
+Action: Final text from the Content team for Alert #1, Email #1 and the already-used message.
+
+6. When is the customer prompted to add or verify an email?
+The PRD wants a prompt but gives no trigger, place or frequency.
+Action: Where it appears (after sign-in, on home, in profile), how often, and for customers with no email at all.
+Figma: https://www.figma.com/design/pQF6ll7EUsSqQhDSjkIt92/IA---Profile?node-id=12752-13410
+
+7. Marketing emails: on or off by default, and what consent text?
+The PRD does not say the starting state or consent wording of the marketing option.
+Action: Default state (recommended: off) and who supplies the consent text.
+
+DESIGN TEAM
+1. Profile entry and email status are not drawn (blocking)
+The entry into the flow is marked "not finalized" and the profile shows no email status.
+Action: The final entry and the email row in three states: no email, waiting for verification, verified.
+Figma: https://www.figma.com/design/pQF6ll7EUsSqQhDSjkIt92/IA---Profile?node-id=16089-29641
+Figma: https://www.figma.com/design/pQF6ll7EUsSqQhDSjkIt92/IA---Profile?node-id=16543-28207
+
+2. No design for the marketing-emails option (blocking)
+The second story has no screens, and the deep link to it has no destination.
+Action: Frames for the option, its off, on and unverified-email states, and the error when access is disabled.
+Figma: https://www.figma.com/design/pQF6ll7EUsSqQhDSjkIt92/IA---Profile?node-id=16543-28207
+
+3. Wrong code, failed PACI and locked username are not drawn
+The three failure outcomes in the PRD have no frames in this journey.
+Action: Frames, or confirmation that the existing step-up screens are reused unchanged.
+Figma: https://www.figma.com/design/pQF6ll7EUsSqQhDSjkIt92/IA---Profile?node-id=16089-16341
+
+4. Missing states in the add and verify screens
+Several states the PRD implies are missing, and everything is shown in English only.
+Action: Frames for each, with Arabic versions.
+Figma: https://www.figma.com/design/pQF6ll7EUsSqQhDSjkIt92/IA---Profile?node-id=16089-29640
+Figma: https://www.figma.com/design/pQF6ll7EUsSqQhDSjkIt92/IA---Profile?node-id=16089-17805
+
+5. Pre-sign-in journey is not drawn
+The PRD's pre-sign-in, PACI-only flow while linking a device has no frames.
+Action: The linking journey with the email step, and whether that step is mandatory.
+Figma: https://www.figma.com/design/pQF6ll7EUsSqQhDSjkIt92/IA---Profile?node-id=16089-17805
+
+6. Email-app chooser and copy fixes
+The email-app list looks iPhone-specific and some copy has mistakes.
+Action: Confirm the system picker is acceptable on Android and correct the copy.
+Figma: https://www.figma.com/design/pQF6ll7EUsSqQhDSjkIt92/IA---Profile?node-id=16089-16312
+
+7. Two design-system parts do not resolve
+The action bar and the sheet images do not fully match design-system options.
+Action: Use supported variants or ask the design-system team to add them.
+Figma: https://www.figma.com/design/pQF6ll7EUsSqQhDSjkIt92/IA---Profile?node-id=16089-16341
+Figma: https://www.figma.com/design/pQF6ll7EUsSqQhDSjkIt92/IA---Profile?node-id=16089-29500
+
+MOBILE DEVELOPER
+1. How does the app open from the verification link?
+The design needs the app to open from an emailed link in several states, and the app's support is not yet checked.
+Action: Check existing link handling, including what happens after sign-in, in the next step.
+Figma: https://www.figma.com/design/pQF6ll7EUsSqQhDSjkIt92/IA---Profile?node-id=16089-17805
+
+BACKEND
+1. Which services exist for add, update, verify and resend? (blocking)
+No backend requirements were supplied, so none of the calls this feature needs are confirmed.
+Action: Per operation, whether it exists and its request and response, or whether Backend will build it.
+
+2. How do the verification link and resend rules work? (blocking)
+The link, its web landing page and the resend limits need confirming.
+Action: The link address and who hosts the page, the outcomes returned, and whether the server enforces and reports resends left and time left.
+
+3. How does the server validate and reject duplicates?
+The "real email" and "already used" rules need to be stated in server terms.
+Action: The checks done, the error returned on a duplicate, and how the reset of shared emails runs.
+
+4. Which service-access ids cover these four services?
+Each of add, update, verify and marketing emails needs a service-access id.
+Action: The id for each and confirmation they follow the behaviour chosen by Product.
+
+5. How are confirmation methods and failures returned?
+The methods offered, attempt limits and lock results need confirming.
+Action: Which methods the server offers in each case, how attempts and the locked result are returned, and whether email is a method after verification.
+
+6. How is the marketing option read and changed?
+Reading and changing the marketing opt-in is not described.
+Action: Whether these exist, their request and response, and the refusal returned for unverified emails.
+
+Data to confirm with Middleware / Integration:
+- Current email address (Profile, change screen): to check
+- Email status (none, not verified, verified) (Profile, prompts, email codes): to check
+- New email waiting for verification (Verify sheet, profile): to check
+- Link validity period (24 hours, configurable) (Link expired screen): to check
+- Resends left (3, configurable) (Resend button): to check
+- Wait before resend (3 minutes, configurable) and time left (Resend countdown): to check
+- Result: email already verified for another customer (Already-used sheet): to check
+- Marketing emails opt-in value (Marketing option): to check
+- Confirmation methods offered (SMS, PACI, email) (Confirm step): to check
+- Code and PACI attempts left, locked state (Failure screens): to check
+- Service-access ids for add, update, verify, marketing emails (Hide or disable): to check
+- Verification-link outcome (verified, expired, used, invalid) (Link landing page, app): to check
